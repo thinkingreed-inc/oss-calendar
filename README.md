@@ -1,4 +1,5 @@
 # OSS Calendar
+![OSS Calendar Logo](https://github.com/thinkingreed-inc/oss-calendar/blob/master/resources/nuxt/assets/img/logo.png?raw=true)  
 OSS Calaendarは企業で使うことを想定したオープンソースのカレンダーアプリです。
 
 ## Motivation
