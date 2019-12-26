@@ -1,0 +1,199 @@
+.icon_logo {
+    width: 240px;
+    height: 54px;
+    display: block;
+}
+
+.fc-icon-chevron-left:before,
+.fc-icon-chevron-right:before {
+    vertical-align: top;
+}
+
+@media screen and (max-width:760px) {
+    .fc-dayGridMonth-button,
+    .fc-timeGridWeek-button,
+    .fc-timeGridDay-button,
+    .fc-resourceTimelineDay-button,
+    .fc-resourceTimelineWeek-button,
+    .fc-today-button,
+    .admin-menu-button {
+        display: none;
+    }
+}
+
+.fc td,
+.fc th {
+    min-width: 20px!important;
+}
+
+
+/***************************************
+                common
+****************************************/
+$baseFontBlack: #7a7a7a;
+.headline{
+    color: $baseFontBlack;
+}
+.fc-center>h2,
+fc-day-header>span
+{
+    color: $baseFontBlack;
+}
+.theme--light.v-application{
+    color: $baseFontBlack;
+}
+
+@media screen and (max-width:450px) {
+    .v-toolbar__content>.v-btn.v-btn--icon:first-child+.v-toolbar__title,
+    .v-toolbar__extension>.v-btn.v-btn--icon:first-child+.v-toolbar__title{
+        padding-left: 0;
+    }
+}
+
+@media (min-width: 1264px) {
+    .container {
+        max-width: unset;
+        min-width: auto;
+    }
+}
+@media (min-width: 960px) {
+    .container {
+        max-width: unset;
+        min-width: auto;
+    }
+}
+.minipopupwrap-padding{
+    padding: 20px 0 10px; 
+}
+.popupwrap-padding{
+    padding: 0 0 10px;
+}
+.loading .v-dialog{
+    box-shadow: none;
+    text-align: center;
+}
+
+/***************************************
+                  Auth
+****************************************/
+.cardtext_padding{
+    padding: 16px;
+}
+
+
+/***************************************
+             fullcalendar
+****************************************/
+.fc-button-primary{
+    color: #2C3E50;
+    background-color: #fff;
+    border-color: #ececec;
+
+    &.fc-button-primary:not(:disabled):active,
+    &.fc-button-primary:not(:disabled).fc-button-active,
+    &.fc-button-primary:hover{
+        color: #ffffff;
+        background-color: #5a5a5a;
+        border-color: #ececec;
+    }
+
+    &:disabled{
+        color: #2C3E50;
+        background-color: #bdbdbd;
+        border-color: #bdbdbd;
+    }
+}
+.fc-cell-content>span.fc-cell-text{
+    color: $baseFontBlack;
+    font-weight: normal;
+}
+.fc-toolbar h2{
+    font-size: 1.4em;
+    line-height: 1.75rem;
+}
+.fc-day-header.fc-widget-header br{
+    display: none;
+}
+@media screen and (max-width:760px) {
+    .fc-toolbar h2{
+        font-size: 1.1rem;
+    }
+    .fc-day-header.fc-widget-header br{
+        display: block;
+    }
+    .span.weekday{
+        font-size: 0.7rem;
+    }
+}
+.departments-select-wrap>div{
+    padding-top: 0;
+}
+
+/***************************************
+                 sidebar
+****************************************/
+.sidebar-listwrap{
+    padding-top: 0;
+    color: $baseFontBlack;
+    
+    .sidebar-titlewrap{
+        background-color: #ef8898;
+
+        .sidebar-title{
+            padding: 20px 0;
+            color: #ffffff;
+            font-weight: bold;
+        }
+    }
+
+    h3{
+        margin-top: 20px;
+        padding: 10px 16px;
+        font-size: 1rem;
+        font-weight: normal;
+        color: $baseFontBlack;
+        &:first-child{
+            padding-top: 0;
+        }
+    }
+
+    .v-list-item{
+        min-height: 35px;
+        .v-list-item__content{
+            padding: 8px 0;
+        }
+        .v-list-item__title{
+            font-size: .9rem;
+        }
+    }
+}
+
+/****************************************
+                管理者メニュー
+*****************************************/
+// IE11対応
+.admin-manu-item{
+    .v-list-item__content{
+        display: block;
+        flex: none;
+    }
+}
+
+
+/****************************************
+                  管理画面
+*****************************************/
+h2{
+    font-size: 1.4rem;
+    font-weight: normal;
+    margin: 10px 5px 20px;
+}
+// テーブルを覆うWrapにpaddingを追加
+.management-tablewrap>.v-data-table{
+    padding: 20px 0 0;
+}
+
+//アップロードボタンに左マージン
+.upload_btn{
+    margin-left: 5px;
+}
