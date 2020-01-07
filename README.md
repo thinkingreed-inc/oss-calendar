@@ -1,12 +1,12 @@
 # OSS Calendar
 ![OSS Calendar Logo](https://github.com/thinkingreed-inc/oss-calendar/blob/master/resources/nuxt/assets/img/logo.png?raw=true)  
-OSS Calaendarは企業で使うことを想定したオープンソースのカレンダーアプリです。
+OSS Calendarは企業で使うことを想定したオープンソースのカレンダーアプリです。
 
 ## Motivation
 企業内のスケジューラーは使いづらい部分が多くあります。  
 しかし、個人のGoogleカレンダーなどと連携させてしまうと情報管理が心配で、開発をしたくてもカレンダーアプリは費用が掛かりすぎてしまいます。
 
-OSS Calaendarは企業で使うことを想定したカレンダーアプリですので、以下のような機能を実現しています。
+OSS Calendarは企業で使うことを想定したカレンダーアプリですので、以下のような機能を実現しています。
 - チーム全員のスケジュールの可視化
 - 素早いメンバーアサインの実現
 - 通常のスケジューラーとしての利用
