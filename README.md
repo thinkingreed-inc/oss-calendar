@@ -47,7 +47,7 @@ CLIENT_URL=http://localhost
 DB_CONNECTION=mysql
 DB_HOST=mysql
 DB_PORT=3306
-DB_DATABASE=crmdb
+DB_DATABASE=osscalendar
 DB_USERNAME=username
 DB_PASSWORD=userpass
 
