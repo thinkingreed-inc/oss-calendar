@@ -68,9 +68,14 @@ fc-day-header>span
 .popupwrap-padding{
     padding: 0 0 10px;
 }
-.loading .v-dialog{
-    box-shadow: none;
-    text-align: center;
+.loading{
+    * {
+        overflow: hidden;
+    }
+    .v-dialog{
+        box-shadow: none;
+        text-align: center;
+    }
 }
 
 /***************************************
