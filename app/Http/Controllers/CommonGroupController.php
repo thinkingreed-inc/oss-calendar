@@ -54,7 +54,6 @@ class CommonGroupController extends Controller
                     "belong_common_groups", "belong_common_groups.common_group_id",
                     "=",
                     "common_groups.id");
-                $query->where('belong_common_groups.user_id', '=', $request->get("user_id"));
                 $query->where('common_groups.is_enable', '=', 1);
                 $query->where('belong_common_groups.is_enable', '=', 1);
                 $query->where('belong_common_groups.deleted_at', '=', null);
