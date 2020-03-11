@@ -26,7 +26,6 @@
                 required
                 type="text"
                 @keyup.enter="login()"
-                @keypress="setCanSubmit"
               ></v-text-field>
               <v-text-field
                 v-model="password"
@@ -39,7 +38,6 @@
                 type="password"
                 style="margin-top: 20px;"
                 @keyup.enter="login()"
-                @keypress="setCanSubmit"
               ></v-text-field>
             </v-form>
           </v-card-text>
@@ -75,20 +73,11 @@ export default {
       username: '',
       password: '',
       color: 'primary',
-      canSubmit: false,
       doLogining: false
     }
   },
   methods: {
-    setCanSubmit() {
-      this.canSubmit = true
-    },
     async login() {
-      if (!this.canSubmit) {
-        return
-      }
-      this.canSubmit = false
-
       try {
         this.doLogining = true
         const data = { username: this.username, password: this.password }
