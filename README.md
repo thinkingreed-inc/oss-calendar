@@ -21,28 +21,28 @@ OSS Calendarは企業で使うことを想定したカレンダーアプリで�
 - vuetify
 
 ## 開発環境
+Dockerを使って開発サーバーを建てる手順について説明します。
+検証はMacOSのDocker for Macで行っていますので、Windowsの場合ところどころ違う可能性があります。
+
 ### バックエンドの準備
 ```sh
+git clone https://github.com/thinkingreed-inc/oss-calendar.git oss-calendar
+cd oss-calendar
 docker-compose build
 docker-compose up -d
 ```
-
->クライアントサーバは`npm run dev`で稼働し、APIサーバは`php artisan server`で稼働させて開発します  
->* .env.sampleをコピーして.envファイルを作成する  
->* .envファイルにあるAPP_KEYを更新する。
-
+#### コンフィグを準備する
 ```bash
-docker ps
-docker exec -it osscal-web bash
-
-php artisan key:generate
+cp .env.example .env
 ```
-
 * クライアントサーバとAPIサーバの.envファイルの設定例：  
 
 ```txt
-APP_URL=http://localhost
-CLIENT_URL=http://localhost
+APP_URL=http://localhost #APIServerのURLを指定
+CLIENT_URL=http://localhost #クライアントのURLを指定、HTMLを配信する場所
+###
+# CLIENT_URLは、npm run devで立ち上げた場合、http://localhost:3000になるため注意する
+###
 
 DB_CONNECTION=mysql
 DB_HOST=mysql
@@ -61,24 +61,34 @@ MAIL_FROM_ADDRESS=null
 MAIL_FROM_NAME="シンキングリード"
 ```
 
-※ 環境構築用のスクリプトを流す
+#### Laravelのセットアップ
 ```bash
+# Dockerコンテナにログインして、Composerで関連ファイルをInstallする
+docker ps
+docker exec -it [container_id] bash
+# ここからコンテナ内
+cd /var/www/html/
 composer install
+php artisan key:generate
 php artisan optimize
 php artisan migrate
 php artisan db:seed
 php artisan passport:install
 ```
 
-* APIサーバのコマンド実行例： 
-
-```bash
-$ php artisan optimize
-※前回の設定ファイルのキャッシュの最適化のため
-```
+#### 注意点
+>* 既存のdockerimageとのポートの競合を回避する必要あります。  
+>もし80番ポート等を使われている場合は、docker-compose.yml内のポートを修正してください。
+>クライアントサーバは`npm run dev`で稼働し、APIサーバはDockerコンテナのNginx、php-fpmで稼働します
+> * .env.sampleをコピーして.envファイルを作成する  
+> * .envファイルにあるAPP_KEYを更新する
+> * .env内部では半角スペースを使用できません。利用する場合はシングルクォーテーションでくくってください。
+> * もし、開発時にLaravelのコードが反映されない場合、php artisan optimizeでキャッシュをクリアする
 
 ### フロントエンドの準備
-Dockerではなく、クライアント側で実行する
+ここではDockerではなく、クライアント側でnpmを実行手順を紹介する
+先にも書きましたが、CLIENT_URLの部分は `http://localhost:3000` を指定してください。
+
 * クライアントのコマンド実行例： 
 ```bash
 npm install
@@ -92,8 +102,7 @@ npm run dev
 ### 補足
 APIサーバには設定ファイルがキャッシュ化されているため、設定変更した場合は、`php artisan optimize`コマンドを実行する。
 
-## 本番環境
-
+## 本番環境（加筆中）
 クライアントサーバとAPIサーバを同一サーバにとして稼働させる  
 ※同一サーバにすることでサーバのメンテナンスコストを削減できる  
 
@@ -107,6 +116,7 @@ APP_URL=http://localhost
 * 静的ファイルの書き出し： 
 ```bash
 $ npm run generate
+$ npm run build
 ※public/_nuxtフォルダに書き出される
 ※.envのAPP_URLとCLIENT_URLによって、.htaccessのRewriteBaseは自動設定される
 ```
