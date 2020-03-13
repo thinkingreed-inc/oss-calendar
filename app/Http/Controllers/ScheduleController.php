@@ -81,13 +81,23 @@ class ScheduleController extends Controller
         }
         foreach ($attendees as $key => $attendee){
             //自分自身の予定データか？ または自分自身がオーナーか？
-            //自分自身の予定データか？ または自分自身がオーナーか？
             if($attendee->user_id == $my->id || $schedule->calendarlist_id == $my->calendarlist_id){
                 return 1;
             }
-            //限定公開(非公開)でない、他人の予定
-            if($schedule->visibility_id == "2" && $schedule->public_setting_id == "1"){
-                return 2;
+            //共有グループに含まれているユーザーの予定
+            if(in_array($attendee->user_id, $user_ids)){
+                // 一般公開の予定
+                if($schedule->visibility_id == "1"){
+                    return 1;
+                }
+                // 予定あり表示の予定
+                if($schedule->visibility_id == "2" && $schedule->public_setting_id == "2"){
+                    return 2;
+                }
+                // 限定公開の予定
+                if($schedule->visibility_id == "2" && $schedule->public_setting_id == "1"){
+                    return 0;
+                }
             }
         }
     }
@@ -150,7 +160,7 @@ class ScheduleController extends Controller
         //繰り返しでない予定の抽出
         //parent_idとparent_uidに従い3次元配列に格納
         $schedules = Schedule::with('attendees')
-            ->where('recurring','=',false)
+            ->where('recurring','=', false)
             ->where('start_date', '<=', $activeEnd)
             ->where('end_date', '>=', $activeStart)
             ->get();
