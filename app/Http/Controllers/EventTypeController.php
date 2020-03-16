@@ -37,6 +37,9 @@ class EventTypeController extends Controller
         if( strlen($sortBy) > 0 ) {
             $query->orderBy($sortBy, $sortStr);
         }
+        if($itemsPerPage == '-1'){
+            $itemsPerPage = 1000;
+        }
         $event_types = $query->paginate($itemsPerPage, ['*'], 'page', $page);
         return $event_types;
     }

@@ -191,11 +191,13 @@ export default {
     // データ一覧
     async indexDatas(search = null) {
       const { sortBy, sortDesc, page, itemsPerPage } = this.options
+      const _itemsPerPage = itemsPerPage === '-1' ? -1 : itemsPerPage
+
       const options = {
         sortBy: sortBy[0],
         sortDesc: sortDesc[0],
         page: page,
-        itemsPerPage: itemsPerPage,
+        itemsPerPage: _itemsPerPage,
         search: search
       }
       this.tableLoading = true

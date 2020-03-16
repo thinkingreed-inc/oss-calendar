@@ -53,12 +53,15 @@ class UserController extends Controller
             $itemsPerPage = $request->get("itemsPerPage");
             $search = $request->get("search");
 
-            $query = User::select('*');
+            $query = User::select('users.*');
             if( strlen($search) > 0 ) {
                 $query->where(\DB::raw("CONCAT(lastname, ',',firstname, ',', email )"), 'LIKE', "%{$search}%");
             }
             if( strlen($sortBy) > 0 ) {
                 $query->orderBy($sortBy, $sortStr);
+            }
+            if($itemsPerPage == '-1'){
+                $itemsPerPage = 1000;
             }
             $users = $query->paginate($itemsPerPage, ['*'], 'page', $page);
         }else{

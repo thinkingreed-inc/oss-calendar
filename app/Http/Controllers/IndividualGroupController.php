@@ -54,6 +54,9 @@ class IndividualGroupController extends Controller
             if (strlen($sortBy) > 0) {
                 $query->orderBy($sortBy, $sortStr);
             }
+            if($itemsPerPage == '-1'){
+                $itemsPerPage = 1000;
+            }
             $individual_groups = $query->paginate($itemsPerPage, ['*'], 'page', $page);
         }
         return $individual_groups;
