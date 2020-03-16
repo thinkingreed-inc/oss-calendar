@@ -1,7 +1,7 @@
 <template>
   <v-layout row justify-center>
     <v-dialog v-model="dialog" persistent max-width="300px">
-      <v-form lazy-validation>
+      <v-form lazy-validation @submit.prevent>
         <v-card>
           <v-card-title>
             <span class="headline"
@@ -20,6 +20,7 @@
                     :error-messages="errors.collect('password')"
                     counter="256"
                     type="password"
+                    @keyup.enter="save()"
                   ></v-text-field>
                 </v-flex>
               </v-layout>
