@@ -373,9 +373,11 @@ class ScheduleController extends Controller
     }
     private function showAttendee($attendees, $result){
         foreach($attendees as $attendee) {
-            $user["value"] = $attendee->user->id;
-            $user["text"] = $attendee->user->lastname . " " . $attendee->user->firstname;
-            $result["users"][] = $user;
+            if(!empty($attendee->user)){
+                $user["value"] = $attendee->user->id;
+                $user["text"] = $attendee->user->lastname . " " . $attendee->user->firstname;
+                $result["users"][] = $user;
+            }
         }
         return $result;
     }
