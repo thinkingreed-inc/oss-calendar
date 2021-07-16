@@ -45,9 +45,10 @@ services:
       DATABASE_HOST: mysql
       DATABASE_NAME: crmdb
       DATABASE_USER: root
-      DATABASE_PASSWORD: 
+      DATABASE_PASSWORD:
       TZ: Asia/Tokyo #`ls -la /etc/localtime | cut -d/ -f8-9
       XDEBUG_CONFIG: remote_host=docker.for.mac.localhosts
+    dns: 8.8.8.8
     container_name: osscal-web
 
   mailcatcher:
