@@ -146,6 +146,10 @@ class ScheduleController extends Controller
                 foreach ($recur_dates as $recur_date) {
                     $temp_schedule->start_date =$recur_date->getStart()->format('Y-m-d H:i:s');
                     $temp_schedule->end_date =$recur_date->getEnd()->format('Y-m-d H:i:s');
+                    // 繰り返しスケジュールのうち、表示に関係ない日付のデータを削除
+                    if(($temp_schedule->start_date > $activeEnd)){
+                        continue;
+                    }
                     $temp_schedule->parent_id = $parentID;
                     $temp_schedule->parent_uid = $parentUID;
                     $event_arrays[$temp_schedule->event_type_id][$parentID][$parentUID] = [
