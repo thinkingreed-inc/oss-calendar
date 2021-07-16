@@ -12,16 +12,17 @@ RUN apt-get update \
   libexif-dev \
   cron \
   default-mysql-client \
-  dos2unix
-RUN apt-get install -y build-essential 
-RUN apt-get install -y autoconf 
-RUN pecl install mcrypt-1.0.2 
+  dos2unix \
+  git
+RUN apt-get install -y build-essential
+RUN apt-get install -y autoconf
+RUN pecl install mcrypt-1.0.2
 RUN docker-php-ext-install -j$(nproc) pdo_mysql mysqli mbstring exif gd iconv
-RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ 
-RUN docker-php-ext-install -j$(nproc) gd zip 
-# RUN pecl install memcached-2.2.0 
+RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
+RUN docker-php-ext-install -j$(nproc) gd zip
+# RUN pecl install memcached-2.2.0
 # RUN docker-php-ext-enable memcache
-# RUN pecl install xdebug-2.5.5 
+# RUN pecl install xdebug-2.5.5
 # RUN docker-php-ext-enable xdebug mcrypt
 RUN docker-php-ext-enable mcrypt
 
