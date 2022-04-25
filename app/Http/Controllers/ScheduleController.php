@@ -11,7 +11,7 @@ use App\Models\Recurring;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-
+use DateTime;
 class ScheduleController extends Controller
 {
     protected $user;
@@ -126,6 +126,11 @@ class ScheduleController extends Controller
             ->where('end_date', '>=', $activeStart)
             ->get();
 
+        $activeStartFormatted = new DateTime($activeStart);
+        $activeStartFormatted->format('Y-m-d');
+        $activeEndFormatted = new DateTime($activeEnd);
+        $activeEndFormatted->format('Y-m-d');
+
         //繰り返し予定をRRuleに従い展開
         //parent_idとparent_uidを割り振り3次元配列に格納
         foreach ($recurrings as $key => $recurring){
@@ -147,7 +152,10 @@ class ScheduleController extends Controller
                     $temp_schedule->start_date =$recur_date->getStart()->format('Y-m-d H:i:s');
                     $temp_schedule->end_date =$recur_date->getEnd()->format('Y-m-d H:i:s');
                     // 繰り返しスケジュールのうち、表示に関係ない日付のデータを削除
-                    if(($temp_schedule->start_date > $activeEnd)){
+                    if(($temp_schedule->start_date > $activeEndFormatted)){
+                        continue;
+                    }
+                    if(($temp_schedule->end_date < $activeStartFormatted)){
                         continue;
                     }
                     $temp_schedule->parent_id = $parentID;
