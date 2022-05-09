@@ -43,3 +43,9 @@ ENV PATH $PATH:/composer/vendor/bin
 ADD supervisord.conf /etc/supervisor/conf.d/cron.conf
 
 RUN echo "export LANG=ja_JP.UTF-8" >> /root/.bashrc
+
+ARG PUID=1000
+ARG PGID=1000
+
+RUN groupmod -o -g $PGID www-data && \
+    usermod -o -u $PUID -g www-data www-data
