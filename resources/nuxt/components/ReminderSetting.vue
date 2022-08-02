@@ -34,7 +34,7 @@ export default {
   },
   data() {
     return {
-      selected_reminder: this.propsReminder,
+      selected_reminder: this.propsReminder == 1 ? true : false,
       selected_reminder_minutes: this.propsReminderMinutes
     }
   },
@@ -48,7 +48,7 @@ export default {
       }
       this.$emit(
         'setSelectedReminders',
-        this.selected_reminder,
+        this.selected_reminder ? 1 : 0,
         this.selected_reminder_minutes,
         this.propsValidateColumn
       )
@@ -56,7 +56,7 @@ export default {
     selected_reminder_minutes() {
       this.$emit(
         'setSelectedReminders',
-        this.selected_reminder,
+        this.selected_reminder ? 1 : 0,
         this.selected_reminder_minutes,
         this.propsValidateColumn
       )
@@ -69,7 +69,7 @@ export default {
   methods: {
     //再び初期化するときに実行する関数
     async setInit(reminder, reminder_minutes) {
-      this.selected_reminder = reminder
+      this.selected_reminder = reminder == 1 ? true : false
       this.selected_reminder_minutes = reminder_minutes
     }
   }
