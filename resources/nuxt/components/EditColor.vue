@@ -20,8 +20,9 @@
             label="カラー"
             data-vv-name="color"
             readonly
-            >{{ showColor }}</v-text-field
-          >
+            >{{ showColor }}
+            <template v-slot:label><required-label propsLabelName="カラー" /></template>
+          </v-text-field>
         </v-flex>
       </v-layout>
     </v-container>
@@ -29,7 +30,18 @@
 </template>
 
 <script>
+import RequiredLabel from '~/components/label/RequiredLabel'
+
 export default {
+  components: {
+    RequiredLabel
+  },
+  props: {
+    propColor: {
+      type: String,
+      default: '#FFFFFFFF'
+    },
+  },
   data() {
     return {
       // color picker 初期設定
