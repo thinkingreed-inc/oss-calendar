@@ -20,6 +20,7 @@
                     :error-messages="errors.collect('email')"
                     counter="256"
                     type="tel"
+                    data-vv-as="メールアドレス"
                   >
                     <template v-slot:label><required-label propsLabelName="メールアドレス" /></template>
                   </v-text-field>

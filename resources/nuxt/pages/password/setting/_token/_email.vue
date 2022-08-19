@@ -23,6 +23,7 @@
                 counter="256"
                 autofocus
                 type="password"
+                data-vv-as="新しいパスワード"
               ></v-text-field>
               <v-text-field
                 v-model="password_confirmation"
@@ -32,6 +33,7 @@
                 :error-messages="errors.collect('password_confirmation')"
                 counter="256"
                 type="password"
+                data-vv-as="新しいパスワード（確認用）"
               ></v-text-field>
             </v-form>
           </v-card-text>

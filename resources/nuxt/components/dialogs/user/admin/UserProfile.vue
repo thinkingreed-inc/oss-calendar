@@ -20,6 +20,7 @@
                     :error-messages="errors.collect('username')"
                     counter="16"
                     required
+                    data-vv-as="ユーザー名"
                   >
                     <template v-slot:label><required-label propsLabelName="ユーザ名" /></template>
                   </v-text-field>
@@ -32,6 +33,7 @@
                     data-vv-name="lastname"
                     :error-messages="errors.collect('lastname')"
                     required
+                    data-vv-as="苗字"
                   >
                     <template v-slot:label><required-label propsLabelName="苗字" /></template>
                   </v-text-field>
@@ -56,6 +58,7 @@
                     data-vv-name="email"
                     :error-messages="errors.collect('email')"
                     required
+                    data-vv-as="メールアドレス"
                   >
                     <template v-slot:label><required-label propsLabelName="メールアドレス" /></template>
                   </v-text-field>
@@ -90,6 +93,7 @@
                     data-vv-name="role_id"
                     :error-messages="errors.collect('role_id')"
                     outline
+                    data-vv-as="権限"
                   >
                     <template v-slot:label><required-label propsLabelName="権限" /></template>
                   </v-select>

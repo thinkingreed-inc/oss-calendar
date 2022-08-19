@@ -20,6 +20,7 @@
                     :error-messages="errors.collect('name')"
                     counter="100"
                     required
+                    data-vv-as="共有グループ"
                   >
                     <template v-slot:label><required-label propsLabelName="共有グループ" /></template>
                   </v-text-field>
@@ -39,6 +40,7 @@
                     data-vv-name="rank"
                     :error-messages="errors.collect('rank')"
                     required
+                    data-vv-as="表示順"
                   >
                     <template v-slot:label><required-label propsLabelName="表示順" /></template>
                   </v-text-field>

@@ -25,6 +25,7 @@
                 counter="256"
                 required
                 type="text"
+                data-vv-as="ユーザ名"
                 @keyup.enter="login()"
               >
                 <template v-slot:label><required-label propsLabelName="ユーザ名" /></template>
@@ -38,7 +39,8 @@
                 :error-messages="errors.collect('password')"
                 counter="256"
                 type="password"
-                style="margin-top: 20px;"
+                style="margin-top: 20px"
+                data-vv-as="パスワード"
                 @keyup.enter="login()"
               >
                 <template v-slot:label><required-label propsLabelName="パスワード" /></template>

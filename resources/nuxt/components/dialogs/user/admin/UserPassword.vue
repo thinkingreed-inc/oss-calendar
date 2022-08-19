@@ -20,6 +20,7 @@
                     :error-messages="errors.collect('password')"
                     counter="256"
                     type="password"
+                    data-vv-as="パスワード"
                     @keyup.enter="save()"
                   >
                     <template v-slot:label><required-label propsLabelName="パスワード" /></template>
