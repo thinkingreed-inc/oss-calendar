@@ -20,7 +20,9 @@
                     :error-messages="errors.collect('summary')"
                     counter="100"
                     required
-                  ></v-text-field>
+                  >
+                    <template v-slot:label><required-label propsLabelName="休祝日名" /></template>
+                  </v-text-field>
                 </v-flex>
 
                 <v-flex class="xs8">
@@ -41,7 +43,9 @@
                         label="休祝日"
                         readonly
                         v-on="on"
-                      ></v-text-field>
+                      >
+                        <template v-slot:label><required-label propsLabelName="休祝日" /></template>
+                      </v-text-field>
                     </template>
                     <v-date-picker
                       v-model="selected.holiday"
@@ -70,7 +74,9 @@
                     data-vv-name="rank"
                     :error-messages="errors.collect('rank')"
                     required
-                  ></v-text-field>
+                  >
+                    <template v-slot:label><required-label propsLabelName="表示順" /></template>
+                  </v-text-field>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -91,10 +97,12 @@
 </template>
 
 <script>
+import RequiredLabel from '~/components/label/RequiredLabel'
 import SingleSubmitButton from '~/components/buttons/SingleSubmitButton'
 
 export default {
   components: {
+    RequiredLabel,
     SingleSubmitButton
   },
   props: {

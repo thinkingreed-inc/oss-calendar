@@ -17,7 +17,9 @@
                     v-model="selected.home_page_id"
                     :items="getCalendarTypes()"
                     label="ホーム画面"
-                  ></v-select>
+                  >
+                    <template v-slot:label><required-label propsLabelName="ホーム画面" /></template>
+                  </v-select>
                 </v-flex>
 
                 <!-- 通知 -->
@@ -58,12 +60,14 @@
   </v-layout>
 </template>
 <script>
+import RequiredLabel from '~/components/label/RequiredLabel'
 import SingleSubmitButton from '~/components/buttons/SingleSubmitButton'
 import ReminderSetting from '~/components/ReminderSetting'
 import MessageDialog from '~/components/dialogs/MessageDialog'
 
 export default {
   components: {
+    RequiredLabel,
     SingleSubmitButton,
     ReminderSetting,
     MessageDialog

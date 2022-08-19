@@ -25,6 +25,7 @@
                 autofocus
                 type="tel"
               >
+                <template v-slot:label><required-label propsLabelName="メールアドレス" /></template>
               </v-text-field>
             </v-form>
           </v-card-text>
@@ -47,11 +48,13 @@
 </template>
 
 <script>
+import RequiredLabel from '~/components/label/RequiredLabel'
 import SingleSubmitButton from '~/components/buttons/SingleSubmitButton'
 
 export default {
   layout: 'noauth',
   components: {
+    RequiredLabel,
     SingleSubmitButton
   },
   data() {
