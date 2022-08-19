@@ -60,7 +60,7 @@ class UserController extends Controller
 
             $query = User::select('users.*');
             if( strlen($search) > 0 ) {
-                $query->where(\DB::raw("CONCAT(username, ',', lastname, ',', IFNULL(firstname,''), ',', IFNULL(email,'') )"), 'LIKE', "%{$search}%");
+                $query->where(\DB::raw("CONCAT(lastname, ',', IFNULL(firstname,''), ',', IFNULL(email,'') )"), 'LIKE', "%{$search}%");
             }
             if( strlen($sortBy) > 0 ) {
                 $query->orderBy($sortBy, $sortStr);
