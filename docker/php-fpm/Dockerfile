@@ -1,4 +1,4 @@
-FROM php:7.2-fpm
+FROM php:8.1-fpm
 
 ADD php.ini /usr/local/etc/php/conf.d/php.ini
 ADD added.conf /usr/local/etc/php-fpm.d/added.conf
@@ -13,12 +13,14 @@ RUN apt-get update \
   cron \
   default-mysql-client \
   dos2unix \
-  git
+  git \
+  libonig-dev \
+  libzip-dev
 RUN apt-get install -y build-essential
 RUN apt-get install -y autoconf
-RUN pecl install mcrypt-1.0.2
-RUN docker-php-ext-install -j$(nproc) pdo_mysql mysqli mbstring exif gd iconv
-RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
+RUN pecl install mcrypt-1.0.5
+RUN docker-php-ext-install -j$(nproc) pdo_mysql mysqli exif gd iconv
+RUN docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/
 RUN docker-php-ext-install -j$(nproc) gd zip
 # RUN pecl install memcached-2.2.0
 # RUN docker-php-ext-enable memcache

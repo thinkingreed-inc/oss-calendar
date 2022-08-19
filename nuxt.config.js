@@ -8,7 +8,7 @@ const copyHtaccessFile = 'copy/.htaccess'
 const desHtaccessFile = 'public/.htaccess'
 
 module.exports = {
-  mode: 'spa',
+  ssr: false,
   srcDir: 'resources/nuxt/',
   server: {
     port: client_url.port || '3000', // デフォルト: 3000
@@ -164,7 +164,7 @@ module.exports = {
       // callback はOauth認証等で必要となる コールバックルートです。
       callback: '/callback',
       // home はログイン後のリダイレクトURLです。
-      home: '/'
+      home: false
     }
   }
 }

@@ -15,6 +15,7 @@ services:
       - ./docker/misc/data:/var/lib/mysql
       - ./docker/misc/conf.d/docker.cnf:/etc/mysql/conf.d/docker.cnf:ro
     container_name: osscal-db
+    restart: always
 
   nginx:
     build: ./docker/nginx
@@ -33,6 +34,7 @@ services:
       LANGUAGE: ja_JP:ja
       LC_ALL: ja_JP.UTF-8
       TZ: Asia/Tokyo #`ls -la /etc/localtime | cut -d/ -f8-9
+    restart: always
 
   web:
     build: ./docker/php-fpm
@@ -50,6 +52,7 @@ services:
       XDEBUG_CONFIG: remote_host=docker.for.mac.localhosts
     dns: 8.8.8.8
     container_name: osscal-web
+    restart: always
 
   mailcatcher:
     image: schickling/mailcatcher
