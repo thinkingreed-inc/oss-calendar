@@ -35,16 +35,6 @@
                   />
                 </v-flex>
 
-                <!-- 部署階層 -->
-                <v-flex class="xs8">
-                  <tree-department-radio
-                    ref="department"
-                    :props-selected-department="selected.parent_id"
-                    :props-default-departments="selected.departments"
-                    @setSelectedDepartments="setSelectedDepartments"
-                  ></tree-department-radio>
-                </v-flex>
-
                 <v-flex class="xs6">
                   <v-text-field
                     v-model="selected.rank"
