@@ -27,16 +27,16 @@ class UserStoreRequest extends FormRequest
          * 編集画面の時
          */
         if ($this -> id) {
-            $usernameRule = 'required|unique:users,username,' . $this -> id . ',id';
-            $emailRule = 'email|unique:users,email,' . $this -> id . ',id';
+            $usernameRule = 'required|unique:users,username,' . $this -> id . ',id,deleted_at,NULL';
+            $emailRule = 'email|unique:users,email,' . $this -> id . ',id,deleted_at,NULL';
             $reminderRule = 'required_if:default_reminders_method_id, 1';
         }
         /*
          * 新規登録画面の時
          */
         else {
-            $usernameRule = 'required|unique:users,username';
-            $emailRule = 'email|unique:users,email';
+            $usernameRule = 'required|unique:users,username,deleted_at,NULL';
+            $emailRule = 'email|unique:users,email,deleted_at,NULL';
             $reminderRule = 'required_if:default_reminders_method_id, 1';
         }
 
