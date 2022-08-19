@@ -750,13 +750,19 @@ export default {
           }
         }
 
-        const detailres = await this.$axios.get('/api/event_type/admin')
-        const detaildata = detailres.data.data
-        for (let number = 0; number < detaildata.length; number++) {
-          typesForDetail[number] = {
-            value: detaildata[number].id,
-            text: detaildata[number].name
+        if (this.$auth.user.role_id == 1) {
+          // 管理者の場合
+          const detailres = await this.$axios.get('/api/event_type/admin')
+          const detaildata = detailres.data.data
+          for (let number = 0; number < detaildata.length; number++) {
+            typesForDetail[number] = {
+              value: detaildata[number].id,
+              text: detaildata[number].name
+            }
           }
+        } else {
+          // 一般の場合
+          typesForDetail = types
         }
       } catch (e) {
         console.log('Error : ' + e.response.data)
