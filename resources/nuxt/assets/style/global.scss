@@ -77,6 +77,11 @@ fc-day-header>span
         text-align: center;
     }
 }
+.loading + div .v-dialog{
+  text-align: center;
+  box-shadow: none;
+  overflow: hidden;
+}
 
 /***************************************
                   Auth
