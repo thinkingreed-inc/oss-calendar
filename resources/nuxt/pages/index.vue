@@ -119,6 +119,7 @@ export default {
         },
         // 週リスト表示
         resourceTimelineWeek: {
+          resourceOrder: 'title,id',
           slotDuration: '01:00', //24時間区切りにする
           slotLabelInterval: '03:00', //直感的な3時間区切りにする
           resourceAreaWidth: '15%',
@@ -126,6 +127,7 @@ export default {
         },
         // 日リスト表示
         resourceTimelineDay: {
+          resourceOrder: 'title,id',
           slotDuration: '01:00', //1時間区切りにする
           slotLabelInterval: '01:00',
           resourceAreaWidth: '15%',
