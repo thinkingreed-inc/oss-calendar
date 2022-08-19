@@ -676,7 +676,7 @@ class ScheduleController extends Controller
 
             $query = User::select('users.*');
             $query = $this->user->getJoinUserQuery($query, $join_model, $id);
-            $query->orderBy('users.id', 'asc');
+            $query->orderBy('users.username', 'asc');
             $users = $query->get();
 
             // IDセット
