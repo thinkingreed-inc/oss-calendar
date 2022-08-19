@@ -782,8 +782,8 @@ export default {
     async setInitEventPublish() {
       if (this.$refs.event) {
         this.$refs.event.setInit(
-          this.selected.visibility_id,
-          this.selected.public_setting_id
+          String(this.selected.visibility_id),
+          String(this.selected.public_setting_id)
         )
       }
     },
