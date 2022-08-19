@@ -88,7 +88,10 @@ export default {
         this.doLogining = true
         const data = { username: this.username, password: this.password }
         await this.$auth.loginWith('local', { data: data })
+        // ここでホームへリダイレクトする前に行いたい処理
+        this.$router.replace({ path: '/' }); // 任意のタイミングでリダイレクト
       } catch (e) {
+        console.log(e)
         await this.serverSideValidate()
         this.doLogining = false
       }
