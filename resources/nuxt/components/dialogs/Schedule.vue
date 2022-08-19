@@ -260,7 +260,7 @@
                         ><v-icon>subtitles</v-icon></v-list-item-icon
                       >
                       <v-list-item-content
-                        >{{ getFilterdText(types, selected.event_type_id) }}
+                        >{{ getFilterdText(typesForDetail, selected.event_type_id_for_detail) }}
                         {{ selected.summary }}</v-list-item-content
                       >
                     </v-list-item>
@@ -589,6 +589,20 @@ export default {
       }
 
       this.detailDialog = true
+      // 予定タイプが設定されていない場合はnullを設定する
+      var eventtypetext = this.getFilterdText(
+        this.types,
+        selected.event_type_id
+      )
+      this.selected.event_type_id =
+        eventtypetext == '' ? null : selected.event_type_id
+      // 詳細画面表示用
+      var eventtypetextForDetail = this.getFilterdText(
+        this.typesForDetail,
+        selected.event_type_id
+      )
+      this.selected.event_type_id_for_detail =
+        eventtypetextForDetail == '' ? null : selected.event_type_id
     },
     // 繰返しスケジュールを開く
     openRelu() {
@@ -724,6 +738,7 @@ export default {
     },
     async setTypes() {
       var types = []
+      var typesForDetail = []
       try {
         const res = await this.$axios.get('/api/event_type')
         const data = res.data.data
@@ -733,10 +748,20 @@ export default {
             text: data[number].name
           }
         }
+
+        const detailres = await this.$axios.get('/api/event_type/admin')
+        const detaildata = detailres.data.data
+        for (let number = 0; number < detaildata.length; number++) {
+          typesForDetail[number] = {
+            value: detaildata[number].id,
+            text: detaildata[number].name
+          }
+        }
       } catch (e) {
         console.log('Error : ' + e.response.data)
       }
       this.types = types
+      this.typesForDetail = typesForDetail
     },
     // 日付、時間の差を見る
     checkDateDiff(field) {

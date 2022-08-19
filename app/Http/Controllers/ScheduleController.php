@@ -204,7 +204,7 @@ class ScheduleController extends Controller
         $eventSources = [];
         foreach ($event_arrays as $event_type_id => $event_array){
             $eventSource = [];
-            $eventSource["color"] = EventType::find($event_type_id)->color;
+            $eventSource["color"] = EventType::find($event_type_id) == null ? "#FFFFFF" : EventType::find($event_type_id)->color; // 予定タイプが存在しない場合、白色にする。
             $eventSource["textColor"] = $this->getBlackOrWhiteFromBackgroundColor($eventSource["color"]);//"white";
             foreach ($event_array as $parent_id => $event_pairs){
                 foreach ($event_pairs as $parent_uid => $event_pair) {
