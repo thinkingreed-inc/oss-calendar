@@ -3,7 +3,7 @@
     <v-flex class="xs12 sm6">
       <v-card class="mx-auto">
         <v-card-title class="subtitle-1" style="height: 60px">
-          <required-label propsLabelName="参加者一覧" />
+          参加者一覧
         </v-card-title>
         <v-list style="height: 200px;overflow-y: scroll">
           <v-list-item-group v-model="selected_users" mandatory multiple>
@@ -48,14 +48,10 @@
 </template>
 
 <script>
-import RequiredLabel from '~/components/label/RequiredLabel'
 
 var defaultDepartmentTopValue = '0'
 var defaultDepartmentTopText = '全て'
 export default {
-  components: {
-    RequiredLabel
-  },
   props: {
     propsDefaultUsers: {
       type: Array,
