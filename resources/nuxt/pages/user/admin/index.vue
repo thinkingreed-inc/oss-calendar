@@ -82,6 +82,7 @@
           </v-icon>
           <!-- 有効無効ボタン -->
           <v-icon
+            v-if="props.item.id != 1"
             @click="
               selectedObj = props.item
               dialogEnableDisable = true
@@ -91,6 +92,7 @@
           </v-icon>
           <!-- 削除ボタン -->
           <v-icon
+            v-if="props.item.id != 1"
             @click="
               selectedObj = props.item
               dialogDestroy = true
