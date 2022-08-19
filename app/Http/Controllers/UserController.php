@@ -362,7 +362,7 @@ class UserController extends Controller
     public function getUsersForTwoSelect($group_id)
     {
         if( $group_id == 0 ) {
-            $users = User::where('is_enable', true)->get();
+            $users = User::where('is_enable', true)->orderBy('username', 'asc')->get();
         }
         else {
             $users = User::where('is_enable', true)->get();

@@ -62,7 +62,7 @@ export default {
     return {
       selected_users: [],
       users: this.propsDefaultUsers,
-      group_id: 0,
+      group_id: "0",
       selected_group_users: [],
       group_users: [],
       groups: []
