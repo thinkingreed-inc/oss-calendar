@@ -873,6 +873,7 @@ export default {
     async delete() {
       try {
         await this.$axios.delete('/api/schedule/' + this.selected.id)
+        this.recurrenceSelectDisabled = false
         console.log('Deleted : id=' + this.selected.id)
         this.detailClose()
         this.$emit('close')
