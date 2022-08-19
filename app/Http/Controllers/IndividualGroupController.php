@@ -30,7 +30,7 @@ class IndividualGroupController extends Controller
             $query->where('individual_groups.is_enable', '=', 1);
             $query->where('belong_individual_groups.is_enable', '=', 1);
             $query->where('belong_individual_groups.deleted_at', '=', null);
-            $query->orderBy('individual_groups.id', 'asc');
+            $query->orderBy('individual_groups.rank', 'asc');
             $query->distinct('individual_groups.*');
             $individual_groups = $query->get();
         }else{

@@ -60,11 +60,11 @@ class CommonGroupController extends Controller
                 $query->where('common_groups.is_enable', '=', 1);
                 $query->where('belong_common_groups.is_enable', '=', 1);
                 $query->where('belong_common_groups.deleted_at', '=', null);
-                $query->orderBy('common_groups.id', 'asc');
+                $query->orderBy('common_groups.rank', 'asc');
                 $query->distinct('common_groups.*');
             }else{
                 // 全部署取得
-                $query->orderBy('common_groups.id', 'asc');
+                $query->orderBy('common_groups.rank', 'asc');
             }
             $common_groups = $query->get();
         }
