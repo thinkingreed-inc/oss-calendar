@@ -52,9 +52,14 @@
           exact
           @click="updateCalendarView(item.id)"
         >
-          <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
-          </v-list-item-content>
+          <v-tooltip top color="transparent">
+            <template v-slot:activator="{ on }"> 
+              <v-list-item-content>
+                <v-list-item-title v-on="on" v-text="item.title"></v-list-item-title>
+              </v-list-item-content>
+            </template>
+            <v-card><v-card-text v-text="item.title" class="black--text" ></v-card-text></v-card>
+          </v-tooltip>
         </v-list-item>
       </v-list-item-group>
     </v-list>
