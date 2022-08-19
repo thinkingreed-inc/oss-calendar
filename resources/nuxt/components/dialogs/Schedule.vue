@@ -467,7 +467,8 @@ export default {
           text: '繰り返し'
         }
       ],
-      types: []
+      types: [],
+      typesForDetail:[],
     }
   },
   computed: {
