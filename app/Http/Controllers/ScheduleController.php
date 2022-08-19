@@ -121,9 +121,10 @@ class ScheduleController extends Controller
 
         //繰り返し予定の抽出
         $recurrings = Recurring::with(['schedule','schedule.attendees'])
-            ->where('deleted','=',false)
-            ->where('start_date', '<=', $activeEnd)
-            ->where('end_date', '>=', $activeStart)
+            ->join('schedules', 'recurrings.schedule_id', '=', 'schedules.id')
+            ->where('recurrings.deleted','=',false)
+            ->where('recurrings.start_date', '<=', $activeEnd)
+            ->where('recurrings.end_date', '>=', \DB::raw("DATE_SUB('".$activeStart."', INTERVAL TIMESTAMPDIFF(DAY,schedules.start_date,schedules.end_date) DAY)"))// カレンダーの開始日から予定の期間（日）を引いた日付が終了日以下の場合
             ->get();
 
         $activeStartFormatted = new DateTime($activeStart);
