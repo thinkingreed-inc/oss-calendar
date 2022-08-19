@@ -64,11 +64,11 @@ class DepartmentController extends Controller
                 $query->where('departments.is_enable', '=', 1);
                 $query->where('belong_departments.is_enable', '=', 1);
                 $query->where('belong_departments.deleted_at', '=', null);
-                $query->orderBy('departments.id', 'asc');
+                $query->orderBy('departments.rank', 'asc');
                 $query->distinct('departments.*');
             }else{
                 // 全部署取得
-                $query->orderBy('departments.id', 'asc');
+                $query->orderBy('departments.rank', 'asc');
             }
             $departments = $query->get();
         }

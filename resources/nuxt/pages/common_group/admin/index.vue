@@ -13,6 +13,8 @@
         class="elevation-1"
         :loading="tableLoading"
         :server-items-length="totalCount"
+        :sort-by.sync="sortBy"
+        :sort-desc.sync="sortDesc"
       >
         <template v-slot:top>
           <v-toolbar flat color="white">
@@ -169,7 +171,9 @@ export default {
 
       // 選択中のオブジェクト
       selectedObj: {},
-      search: '' // フィルタリング検索キーワード
+      search: '', // フィルタリング検索キーワード
+      sortBy:'rank',
+      sortDesc: false,
     }
   },
   watch: {
