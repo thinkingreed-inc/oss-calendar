@@ -73,13 +73,11 @@ composer require laravel/helpers
 composer require laravel/legacy-factories
 composer require symfony/mailgun-mailer symfony/http-client
 composer require fruitcake/laravel-cors
-# composer update
 composer install
 php artisan key:generate
 php artisan optimize
 php artisan migrate
 php artisan db:seed
-php artisan migrate:fresh --seed # 再構築時
 php artisan passport:install
 ```
 
@@ -99,9 +97,7 @@ php artisan passport:install
 * クライアントのコマンド実行例： 
 ```bash
 npm install
-npm install -g nuxt@2.13.3
-# npm install -g eslint-webpack-plugin
-# npm install -g stylus-loader
+npm install -g nuxt
 npm run dev
 ※クライアントサーバのポートは.envに記載してあるポート番号を自動で読み込む
 ```
