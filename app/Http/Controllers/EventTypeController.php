@@ -20,6 +20,13 @@ class EventTypeController extends Controller
         $sortBy = $request->get("sortBy");
         $sortDesc = $request->get("sortDesc");
         $sortStr = "";
+
+        if(!$sortBy){
+            // 並び順が指定されていない場合、デフォルトは「並び順」項目の昇順で表示する。
+            $sortBy = "rank";
+            $sortDesc = "false";
+        }
+
         if($sortDesc == "true") {
             $sortStr = "desc";
         }
