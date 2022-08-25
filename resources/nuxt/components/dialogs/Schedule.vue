@@ -13,7 +13,7 @@
             <v-container grid-list-md>
               <v-layout wrap>
                 <v-flex class="xs12 sm4">
-                  <v-select
+                  <v-autocomplete
                     v-model="selected.event_type_id"
                     v-validate="'required'"
                     data-vv-as="予定タイプ"
@@ -22,7 +22,7 @@
                     label="予定タイプ"
                     data-vv-name="event_type_id"
                     name="event_type_id"
-                  ></v-select>
+                  ></v-autocomplete>
                 </v-flex>
                 <v-flex class="xs12 sm8">
                   <v-text-field
@@ -138,7 +138,7 @@
                   ></v-checkbox>
                 </v-flex>
                 <v-flex v-show="recurrenceSelect" sm4 xs>
-                  <v-select
+                  <v-autocomplete
                     v-model="selected.recurrence.recurrence_id"
                     v-validate="'required'"
                     :error-messages="errors.collect('recurrence_id')"
@@ -146,7 +146,7 @@
                     data-vv-name="recurrence_id"
                     :disabled="recurrenceSelectDisabled"
                     @input="openRelu"
-                  ></v-select>
+                  ></v-autocomplete>
                 </v-flex>
               </v-layout>
 

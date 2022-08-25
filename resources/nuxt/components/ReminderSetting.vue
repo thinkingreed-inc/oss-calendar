@@ -4,13 +4,13 @@
       <v-switch v-model="selected_reminder" label="通知"></v-switch>
     </v-flex>
     <v-flex class="xs8">
-      <v-select
+      <v-autocomplete
         v-model="selected_reminder_minutes"
         :items="getReminderMinutes()"
         :value="selected_reminder_minutes"
         :error-messages="validator.errors.collect(propsValidateColumn)"
         label="何分前"
-      ></v-select>
+      ></v-autocomplete>
     </v-flex>
   </v-layout>
 </template>
