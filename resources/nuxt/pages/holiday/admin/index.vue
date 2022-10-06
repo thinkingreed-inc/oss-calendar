@@ -46,11 +46,11 @@
 
             <!-- 年選択 -->
             <v-flex class="xs1">
-              <v-select
+              <v-autocomplete
                 v-model="holiday_year"
                 :items="holiday_years"
                 label="休祝日年"
-              ></v-select>
+              ></v-autocomplete>
             </v-flex>
 
             <v-text-field

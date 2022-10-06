@@ -64,15 +64,15 @@
 
                 <!-- ホーム画面 -->
                 <v-flex class="xs8">
-                  <v-select
+                  <v-autocomplete
                     v-model="selected.home_page_id"
                     :items="getCalendarTypes()"
                     label="ホーム画面"
-                  ></v-select>
+                  ></v-autocomplete>
                 </v-flex>
 
                 <v-flex class="xs6">
-                  <v-select
+                  <v-autocomplete
                     v-model="selected.role_id"
                     v-validate="'required' | 'role_id'"
                     :items="roleDatas"
@@ -80,7 +80,7 @@
                     data-vv-name="role_id"
                     :error-messages="errors.collect('role_id')"
                     outline
-                  ></v-select>
+                  ></v-autocomplete>
                 </v-flex>
               </v-layout>
             </v-container>
