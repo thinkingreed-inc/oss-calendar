@@ -17,6 +17,7 @@ OSS Calendarは企業で使うことを想定したカレンダーアプリで�
 ## Features
 - Laravel 5.8
 - passport
+- Node.js v16.15.1
 - Vue + VueRouter + Vuex 
 - vuetify
 
