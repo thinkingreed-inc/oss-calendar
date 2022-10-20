@@ -22,13 +22,13 @@
                   </v-text-field>
                 </v-flex>
                 <v-flex class="sm4">
-                  <v-select
+                  <v-autocomplete
                     v-model="selected.recurrence_unit"
                     v-validate="'required'"
                     :items="recurrence_unit"
                     data-vv-name="recurrence_unit"
                     :error-messages="errors.collect('type_id')"
-                  ></v-select>
+                  ></v-autocomplete>
                 </v-flex>
 
                 <v-flex xs12>

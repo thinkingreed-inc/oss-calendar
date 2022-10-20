@@ -28,7 +28,7 @@
     <v-flex class="xs12 sm6">
       <v-card class="mx-auto">
         <v-card-title style="height: 60px" class="departments-select-wrap">
-          <v-select v-model="group_id" :items="groups" label="部署"></v-select>
+          <v-autocomplete v-model="group_id" :items="groups" label="部署"></v-autocomplete>
         </v-card-title>
         <v-list style="height: 200px;overflow-y: scroll">
           <v-list-item-group v-model="selected_group_users" multiple>
