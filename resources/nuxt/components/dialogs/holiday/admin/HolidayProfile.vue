@@ -69,7 +69,7 @@
                 <v-flex class="xs6">
                   <v-text-field
                     v-model="selected.rank"
-                    v-validate="'required'"
+                    v-validate="'required|numeric'"
                     label="表示順"
                     data-vv-name="rank"
                     :error-messages="errors.collect('rank')"

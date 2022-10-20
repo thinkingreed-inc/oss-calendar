@@ -13,13 +13,13 @@
               <v-layout wrap>
                 <!-- ホーム画面 -->
                 <v-flex class="xs8">
-                  <v-select
+                  <v-autocomplete
                     v-model="selected.home_page_id"
                     :items="getCalendarTypes()"
                     label="ホーム画面"
                   >
                     <template v-slot:label><required-label propsLabelName="ホーム画面" /></template>
-                  </v-select>
+                  </v-autocomplete>
                 </v-flex>
 
                 <!-- 通知 -->
