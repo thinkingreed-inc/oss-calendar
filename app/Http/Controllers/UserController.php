@@ -42,6 +42,11 @@ class UserController extends Controller
             //------------------------
             $sortBy = $request->get("sortBy");
             $sortDesc = $request->get("sortDesc");
+            if(!$sortBy){
+                // 並び順が指定されていない場合、デフォルトは「ユーザ名」項目の昇順で表示する。
+                $sortBy = "username";
+                $sortDesc = "false";
+            }
             $sortStr = "";
             if($sortDesc == "true") {
                 $sortStr = "desc";
@@ -55,7 +60,7 @@ class UserController extends Controller
 
             $query = User::select('users.*');
             if( strlen($search) > 0 ) {
-                $query->where(\DB::raw("CONCAT(lastname, ',',firstname, ',', email )"), 'LIKE', "%{$search}%");
+                $query->where(\DB::raw("CONCAT(lastname, ',', IFNULL(firstname,''), ',', IFNULL(email,'') )"), 'LIKE', "%{$search}%");
             }
             if( strlen($sortBy) > 0 ) {
                 $query->orderBy($sortBy, $sortStr);
@@ -75,9 +80,9 @@ class UserController extends Controller
             $query = $this->getJoinUserQuery($query, $join_model, $request->get("id"));
 
             // 全ユーザー取得( joinなし)時、ソート順 ID
-            if(strlen($join_model) > 0){
-                $query->orderBy('users.id', 'asc');
-            }
+            // if(strlen($join_model) == 0){
+                $query->orderBy('users.username', 'asc');
+            // }
             $users = $query->get();
         }
         return $users;
@@ -114,7 +119,7 @@ class UserController extends Controller
             $query->where('users.is_enable', '=', 1);
             $query->where('belong_departments.is_enable', '=', 1);
             $query->where('belong_departments.deleted_at', '=', null);
-            $query->orderBy('belong_departments.rank', 'asc');
+            $query->orderBy('users.username', 'asc');
             $query->distinct('users.*');
         }
         return $query;
@@ -138,7 +143,7 @@ class UserController extends Controller
             $query->where('users.is_enable', '=', 1);
             $query->where('belong_common_groups.is_enable', '=', 1);
             $query->where('belong_common_groups.deleted_at', '=', null);
-            $query->orderBy('belong_common_groups.rank', 'asc');
+            $query->orderBy('users.username', 'asc');
             $query->distinct('users.*');
         }
         return $query;
@@ -162,7 +167,7 @@ class UserController extends Controller
             $query->where('users.is_enable', '=', 1);
             $query->where('belong_individual_groups.is_enable', '=', 1);
             $query->where('belong_individual_groups.deleted_at', '=', null);
-            $query->orderBy('belong_individual_groups.rank', 'asc');
+            $query->orderBy('users.username', 'asc');
             $query->distinct('users.*');
         }
         return $query;
@@ -184,6 +189,7 @@ class UserController extends Controller
                 "users.id");
             $query->where('attendees.schedule_id', '=', $id);
             $query->where('users.is_enable', '=', 1);
+            $query->orderBy('users.username', 'asc');
             $query->distinct('users.*');
         }
         return $query;
@@ -356,7 +362,7 @@ class UserController extends Controller
     public function getUsersForTwoSelect($group_id)
     {
         if( $group_id == 0 ) {
-            $users = User::where('is_enable', true)->get();
+            $users = User::where('is_enable', true)->orderBy('username', 'asc')->get();
         }
         else {
             $users = User::where('is_enable', true)->get();

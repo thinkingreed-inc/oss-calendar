@@ -121,9 +121,10 @@ class ScheduleController extends Controller
 
         //繰り返し予定の抽出
         $recurrings = Recurring::with(['schedule','schedule.attendees'])
-            ->where('deleted','=',false)
-            ->where('start_date', '<=', $activeEnd)
-            ->where('end_date', '>=', $activeStart)
+            ->join('schedules', 'recurrings.schedule_id', '=', 'schedules.id')
+            ->where('recurrings.deleted','=',false)
+            ->where('recurrings.start_date', '<=', $activeEnd)
+            ->where('recurrings.end_date', '>=', \DB::raw("DATE_SUB('".$activeStart."', INTERVAL TIMESTAMPDIFF(DAY,schedules.start_date,schedules.end_date) DAY)"))// カレンダーの開始日から予定の期間（日）を引いた日付が終了日以下の場合
             ->get();
 
         $activeStartFormatted = new DateTime($activeStart);
@@ -204,7 +205,7 @@ class ScheduleController extends Controller
         $eventSources = [];
         foreach ($event_arrays as $event_type_id => $event_array){
             $eventSource = [];
-            $eventSource["color"] = EventType::find($event_type_id)->color;
+            $eventSource["color"] = EventType::find($event_type_id) == null ? "#FFFFFF" : EventType::find($event_type_id)->color; // 予定タイプが存在しない場合、白色にする。
             $eventSource["textColor"] = $this->getBlackOrWhiteFromBackgroundColor($eventSource["color"]);//"white";
             foreach ($event_array as $parent_id => $event_pairs){
                 foreach ($event_pairs as $parent_uid => $event_pair) {
@@ -676,7 +677,7 @@ class ScheduleController extends Controller
 
             $query = User::select('users.*');
             $query = $this->user->getJoinUserQuery($query, $join_model, $id);
-            $query->orderBy('users.id', 'asc');
+            $query->orderBy('users.username', 'asc');
             $users = $query->get();
 
             // IDセット

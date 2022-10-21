@@ -1,6 +1,6 @@
 <template>
   <v-layout row justify-center>
-    <v-dialog v-model="dialog" persistent max-width="600px">
+    <v-dialog v-model="dialog" persistent max-width="100%">
       <v-form lazy-validation>
         <v-card>
           <v-card-title>
@@ -20,6 +20,7 @@
                     :error-messages="errors.collect('name')"
                     counter="100"
                     required
+                    data-vv-as="個別グループ"
                   >
                     <template v-slot:label><required-label propsLabelName="個別グループ" /></template>
                   </v-text-field>
@@ -39,6 +40,7 @@
                     data-vv-name="rank"
                     :error-messages="errors.collect('rank')"
                     required
+                    data-vv-as="表示順"
                   >
                     <template v-slot:label><required-label propsLabelName="表示順" /></template>
                   </v-text-field>

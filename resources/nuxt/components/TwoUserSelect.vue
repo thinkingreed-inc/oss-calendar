@@ -8,9 +8,14 @@
         <v-list style="height: 200px;overflow-y: scroll">
           <v-list-item-group v-model="selected_users" mandatory multiple>
             <v-list-item v-for="(user, i) in users" :key="i" :value="user">
-              <v-list-item-content>
-                <v-list-item-title v-text="user.text"></v-list-item-title>
-              </v-list-item-content>
+              <v-tooltip top color="transparent">
+                <template v-slot:activator="{ on }"> 
+                  <v-list-item-content>
+                    <v-list-item-title v-on="on" v-text="user.text"></v-list-item-title>
+                  </v-list-item-content>
+                </template>
+                <v-card><v-card-text v-text="user.text" class="black--text" ></v-card-text></v-card>
+              </v-tooltip>
             </v-list-item>
           </v-list-item-group>
         </v-list>
@@ -32,9 +37,14 @@
               :key="i"
               :value="group_user"
             >
-              <v-list-item-content>
-                <v-list-item-title v-text="group_user.text"></v-list-item-title>
-              </v-list-item-content>
+            <v-tooltip top color="transparent">
+              <template v-slot:activator="{ on }"> 
+                <v-list-item-content>
+                  <v-list-item-title v-on="on" v-text="group_user.text"></v-list-item-title>
+                </v-list-item-content>
+              </template>
+              <v-card><v-card-text v-text="group_user.text" class="black--text" ></v-card-text></v-card>
+            </v-tooltip>
             </v-list-item>
           </v-list-item-group>
         </v-list>
@@ -62,7 +72,7 @@ export default {
     return {
       selected_users: [],
       users: this.propsDefaultUsers,
-      group_id: 0,
+      group_id: "0",
       selected_group_users: [],
       group_users: [],
       groups: []

@@ -119,6 +119,7 @@ export default {
         },
         // 週リスト表示
         resourceTimelineWeek: {
+          resourceOrder: 'title,id',
           slotDuration: '01:00', //24時間区切りにする
           slotLabelInterval: '03:00', //直感的な3時間区切りにする
           resourceAreaWidth: '15%',
@@ -126,6 +127,7 @@ export default {
         },
         // 日リスト表示
         resourceTimelineDay: {
+          resourceOrder: 'title,id',
           slotDuration: '01:00', //1時間区切りにする
           slotLabelInterval: '01:00',
           resourceAreaWidth: '15%',
@@ -359,15 +361,41 @@ export default {
     dateClick(info) {
       // スマホ・タブレットの場合はselectイベントを実行させるためには長押しが必要になる。
       // 使い勝手が非常に悪いため、dateClickでもスケジュール登録画面が表示されるようにしておく。
+      var current_datetime = moment()
+      var remainder = 30 - (current_datetime.minute() % 30)
+      var datestring = moment(info.dateStr).format('YYYY-MM-DD')
       if (/(Android)|(iPhone)|(iPad)/.test(navigator.userAgent)) {
-        this.$refs.schedule.setInit(info)
+        if (info.startStr == undefined) {
+          if (info.view.type == 'dayGridMonth') {
+            var start_datetime = current_datetime.add(remainder, 'minutes')
+            info.startStr = datestring + start_datetime.format(' HH:mm')
+            var end_datetime = start_datetime.add(30, 'minutes')
+            info.endStr =
+              moment(datestring)
+                .add(+1, 'days')
+                .format('YYYY-MM-DD') + end_datetime.format(' HH:mm')
+          } else {
+            var start_datetime = moment(info.dateStr).add(remainder, 'minutes')
+            info.startStr = info.dateStr
+            var end_datetime = moment(info.dateStr).add(30, 'minutes')
+            info.endStr =
+              moment(info.dateStr).format('YYYY-MM-DD') +
+              end_datetime.format(' HH:mm')
+          }
+          this.$refs.schedule.setInit(info)
+        }
+      } else {
+        if (info.view.type == 'dayGridMonth') {
+          var start_datetime = current_datetime.add(remainder, 'minutes')
+          info.startStr = datestring + start_datetime.format(' HH:mm')
+          var end_datetime = start_datetime.add(30, 'minutes')
+          info.endStr =
+            moment(datestring)
+              .add(+1, 'days')
+              .format('YYYY-MM-DD') + end_datetime.format(' HH:mm')
+          this.$refs.schedule.setInit(info)
+        }
       }
-      /**
-        alert('Clicked on: ' + info.dateStr)
-        alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY)
-        alert('Current view: ' + info.view.type)
-        info.dayEl.style.backgroundColor = 'red'
-        **/
     },
     // 必要な範囲内の期間にあるスケジュール取得
     async datesRender(info) {

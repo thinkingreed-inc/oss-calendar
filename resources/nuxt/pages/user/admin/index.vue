@@ -13,6 +13,8 @@
         class="elevation-1"
         :loading="tableLoading"
         :server-items-length="totalCount"
+        :sort-by.sync="sortBy"
+        :sort-desc.sync="sortDesc"
       >
         <template v-slot:top>
           <v-toolbar flat color="white">
@@ -80,6 +82,7 @@
           </v-icon>
           <!-- 有効無効ボタン -->
           <v-icon
+            v-if="props.item.id != 1"
             @click="
               selectedObj = props.item
               dialogEnableDisable = true
@@ -89,6 +92,7 @@
           </v-icon>
           <!-- 削除ボタン -->
           <v-icon
+            v-if="props.item.id != 1"
             @click="
               selectedObj = props.item
               dialogDestroy = true
@@ -202,7 +206,9 @@ export default {
 
       // 選択中のオブジェクト
       selectedObj: {},
-      search: '' // フィルタリング検索キーワード
+      search: '', // フィルタリング検索キーワード
+      sortBy: 'username',
+      sortDesc: false,
     }
   },
   watch: {

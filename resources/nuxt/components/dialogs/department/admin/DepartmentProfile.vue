@@ -1,7 +1,7 @@
 /* eslint-disable vue/require-valid-default-prop */
 <template>
   <v-layout row justify-center>
-    <v-dialog v-model="dialog" persistent max-width="600px">
+    <v-dialog v-model="dialog" persistent max-width="100%">
       <v-form lazy-validation>
         <v-card>
           <v-card-title>
@@ -21,6 +21,7 @@
                     :error-messages="errors.collect('name')"
                     counter="100"
                     required
+                    data-vv-as="部署"
                   >
                     <template v-slot:label><required-label propsLabelName="部署" /></template>
                   </v-text-field>
@@ -35,16 +36,6 @@
                   />
                 </v-flex>
 
-                <!-- 部署階層 -->
-                <v-flex class="xs8">
-                  <tree-department-radio
-                    ref="department"
-                    :props-selected-department="selected.parent_id"
-                    :props-default-departments="selected.departments"
-                    @setSelectedDepartments="setSelectedDepartments"
-                  ></tree-department-radio>
-                </v-flex>
-
                 <v-flex class="xs6">
                   <v-text-field
                     v-model="selected.rank"
@@ -53,6 +44,7 @@
                     data-vv-name="rank"
                     :error-messages="errors.collect('rank')"
                     required
+                    data-vv-as="表示順"
                   >
                     <template v-slot:label><required-label propsLabelName="表示順" /></template>
                   </v-text-field>

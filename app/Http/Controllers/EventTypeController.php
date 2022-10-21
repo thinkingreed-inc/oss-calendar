@@ -17,6 +17,8 @@ class EventTypeController extends Controller
     public function index(Request $request)
     {
         //
+        $uri = $request->path();
+
         $sortBy = $request->get("sortBy");
         $sortDesc = $request->get("sortDesc");
         $sortStr = "";
@@ -41,6 +43,13 @@ class EventTypeController extends Controller
         if( strlen($search) > 0 ) {
             $query->where("name", 'LIKE', "%{$search}%");
         }
+
+        if (in_array('admin', explode('/', $uri))) {
+            // 管理者の管理画面の場合
+        } else {
+            $query->where('event_types.is_enable', '=', 1);
+        }
+
         if( strlen($sortBy) > 0 ) {
             $query->orderBy($sortBy, $sortStr);
         }

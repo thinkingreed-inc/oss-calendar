@@ -14,7 +14,6 @@ use Illuminate\Http\Request;
 */
 
 // ログイン
-logger('test', [__FILE__ => __LINE__]);
 Route::post('/auth/login', 'Auth\LoginController@login')->name("auth.login");
 
 

@@ -10,9 +10,14 @@
               :key="i"
               :value="department"
             >
-              <v-list-item-content>
-                <v-list-item-title v-text="department.text"></v-list-item-title>
-              </v-list-item-content>
+              <v-tooltip top color="transparent">
+                <template v-slot:activator="{ on }"> 
+                  <v-list-item-content>
+                    <v-list-item-title v-on="on" v-text="department.text"></v-list-item-title>
+                  </v-list-item-content>
+                </template>
+                <v-card><v-card-text v-text="department.text" class="black--text" ></v-card-text></v-card>
+              </v-tooltip>
             </v-list-item>
           </v-list-item-group>
         </v-list>

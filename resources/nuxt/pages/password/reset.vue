@@ -24,6 +24,7 @@
                 required
                 autofocus
                 type="tel"
+                data-vv-as="メールアドレス"
               >
                 <template v-slot:label><required-label propsLabelName="メールアドレス" /></template>
               </v-text-field>
