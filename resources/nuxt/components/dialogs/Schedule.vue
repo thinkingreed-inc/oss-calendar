@@ -22,7 +22,9 @@
                     label="予定タイプ"
                     data-vv-name="event_type_id"
                     name="event_type_id"
-                  ></v-autocomplete>
+                  >
+                    <template v-slot:label><required-label propsLabelName="予定タイプ" /></template>
+                  </v-autocomplete>
                 </v-flex>
                 <v-flex class="xs12 sm8">
                   <v-text-field
@@ -33,7 +35,9 @@
                     name="summary"
                     data-vv-name="summary"
                     :error-messages="errors.collect('summary')"
-                  ></v-text-field>
+                  >
+                    <template v-slot:label><required-label propsLabelName="件名" /></template>
+                  </v-text-field>
                 </v-flex>
                 <v-flex sm3 xs6>
                   <v-menu
@@ -146,7 +150,9 @@
                     data-vv-name="recurrence_id"
                     :disabled="recurrenceSelectDisabled"
                     @input="openRelu"
-                  ></v-autocomplete>
+                  >
+                    <template v-slot:label><required-label propsLabelName="繰り返し設定" /></template>
+                  </v-autocomplete>
                 </v-flex>
               </v-layout>
 
@@ -374,6 +380,7 @@
 </template>
 
 <script>
+import RequiredLabel from '~/components/label/RequiredLabel'
 import SingleSubmitButton from '~/components/buttons/SingleSubmitButton'
 import TwoUserSelect from '~/components/TwoUserSelect'
 import Relu from '~/components/dialogs/Relu'
@@ -385,6 +392,7 @@ import EventPublish from '~/components/EventPublish'
 
 export default {
   components: {
+    RequiredLabel,
     Relu,
     SingleSubmitButton,
     TwoUserSelect,

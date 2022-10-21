@@ -15,12 +15,14 @@
                   <v-text-field
                     v-model="selected.username"
                     v-validate="'required'"
-                    label="ユーザ名(*)"
+                    label="ユーザ名"
                     data-vv-name="username"
                     :error-messages="errors.collect('username')"
                     counter="16"
                     required
-                  ></v-text-field>
+                  >
+                    <template v-slot:label><required-label propsLabelName="ユーザ名" /></template>
+                  </v-text-field>
                 </v-flex>
                 <v-flex class="xs6">
                   <v-text-field
@@ -30,7 +32,9 @@
                     data-vv-name="lastname"
                     :error-messages="errors.collect('lastname')"
                     required
-                  ></v-text-field>
+                  >
+                    <template v-slot:label><required-label propsLabelName="苗字" /></template>
+                  </v-text-field>
                 </v-flex>
                 <v-flex class="xs6">
                   <v-text-field
@@ -40,7 +44,9 @@
                     data-vv-name="firstname"
                     :error-messages="errors.collect('firstname')"
                     required
-                  ></v-text-field>
+                  >
+                    <template v-slot:label><required-label propsLabelName="名前" /></template>
+                  </v-text-field>
                 </v-flex>
                 <v-flex class="xs12">
                   <v-text-field
@@ -50,7 +56,9 @@
                     data-vv-name="email"
                     :error-messages="errors.collect('email')"
                     required
-                  ></v-text-field>
+                  >
+                    <template v-slot:label><required-label propsLabelName="メールアドレス" /></template>
+                  </v-text-field>
                 </v-flex>
 
                 <!-- 所属部署 -->
@@ -68,7 +76,9 @@
                     v-model="selected.home_page_id"
                     :items="getCalendarTypes()"
                     label="ホーム画面"
-                  ></v-autocomplete>
+                  >
+                    <template v-slot:label><required-label propsLabelName="ホーム画面" /></template>
+                  </v-autocomplete>
                 </v-flex>
 
                 <v-flex class="xs6">
@@ -80,7 +90,9 @@
                     data-vv-name="role_id"
                     :error-messages="errors.collect('role_id')"
                     outline
-                  ></v-autocomplete>
+                  >
+                    <template v-slot:label><required-label propsLabelName="権限" /></template>
+                  </v-autocomplete>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -101,12 +113,14 @@
 </template>
 
 <script>
+import RequiredLabel from '~/components/label/RequiredLabel'
 import SingleSubmitButton from '~/components/buttons/SingleSubmitButton'
 import TwoDepartmentSelect from '~/components/TwoDepartmentSelect'
 
 export default {
   inject: ['$validator'],
   components: {
+    RequiredLabel,
     SingleSubmitButton,
     TwoDepartmentSelect
   },

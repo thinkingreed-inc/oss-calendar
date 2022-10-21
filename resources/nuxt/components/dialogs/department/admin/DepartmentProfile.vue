@@ -21,7 +21,9 @@
                     :error-messages="errors.collect('name')"
                     counter="100"
                     required
-                  ></v-text-field>
+                  >
+                    <template v-slot:label><required-label propsLabelName="部署" /></template>
+                  </v-text-field>
                 </v-flex>
 
                 <!-- 所属ユーザー -->
@@ -51,7 +53,9 @@
                     data-vv-name="rank"
                     :error-messages="errors.collect('rank')"
                     required
-                  ></v-text-field>
+                  >
+                    <template v-slot:label><required-label propsLabelName="表示順" /></template>
+                  </v-text-field>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -72,6 +76,7 @@
 </template>
 
 <script>
+import RequiredLabel from '~/components/label/RequiredLabel'
 import TreeDepartmentRadio from '~/components/TreeDepartmentRadio'
 import SingleSubmitButton from '~/components/buttons/SingleSubmitButton'
 import TwoUserSelect from '~/components/TwoUserSelect'
@@ -81,6 +86,7 @@ var defaultDepartmentTopLabel = '階層TOP'
 
 export default {
   components: {
+    RequiredLabel,
     TreeDepartmentRadio,
     SingleSubmitButton,
     TwoUserSelect

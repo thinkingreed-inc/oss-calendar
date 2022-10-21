@@ -26,7 +26,9 @@
                 required
                 type="text"
                 @keyup.enter="login()"
-              ></v-text-field>
+              >
+                <template v-slot:label><required-label propsLabelName="ユーザ名" /></template>
+              </v-text-field>
               <v-text-field
                 v-model="password"
                 v-validate="'required'"
@@ -38,7 +40,9 @@
                 type="password"
                 style="margin-top: 20px;"
                 @keyup.enter="login()"
-              ></v-text-field>
+              >
+                <template v-slot:label><required-label propsLabelName="パスワード" /></template>
+              </v-text-field>
             </v-form>
           </v-card-text>
           <v-card-actions style="padding: 30px;">
@@ -61,11 +65,13 @@
 </template>
 
 <script>
+import RequiredLabel from '~/components/label/RequiredLabel'
 import SingleSubmitButton from '~/components/buttons/SingleSubmitButton'
 
 export default {
   layout: 'noauth',
   components: {
+    RequiredLabel,
     SingleSubmitButton
   },
   data() {
@@ -82,7 +88,10 @@ export default {
         this.doLogining = true
         const data = { username: this.username, password: this.password }
         await this.$auth.loginWith('local', { data: data })
+        // ここでホームへリダイレクトする前に行いたい処理
+        this.$router.replace({ path: '/' }); // 任意のタイミングでリダイレクト
       } catch (e) {
+        console.log(e)
         await this.serverSideValidate()
         this.doLogining = false
       }

@@ -31,7 +31,6 @@ class ChangeSchedulesTableAddDeleteFlag extends Migration
     public function down()
     {
         Schema::table('schedules', function (Blueprint $table) {
-            $table->dropColumn('deleted');
             $table->dropColumn('recurring');
             $table->dropColumn('recurring_id');
             $table->dropColumn('parent_id');

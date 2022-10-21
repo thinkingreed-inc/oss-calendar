@@ -1,10 +1,14 @@
 <?php
 
+namespace Database\Seeders;
 use App\Models\DefaultReminder;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Calendarlist;
+use DB;
+use Hash;
+use Str;
 
 class FirstUserCreateSeeder extends Seeder
 {

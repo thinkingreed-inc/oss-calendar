@@ -20,7 +20,9 @@
                     :error-messages="errors.collect('name')"
                     counter="100"
                     required
-                  ></v-text-field>
+                  >
+                    <template v-slot:label><required-label propsLabelName="個別グループ" /></template>
+                  </v-text-field>
                 </v-flex>
                 <v-flex class="xs12">
                   <two-user-select
@@ -37,7 +39,9 @@
                     data-vv-name="rank"
                     :error-messages="errors.collect('rank')"
                     required
-                  ></v-text-field>
+                  >
+                    <template v-slot:label><required-label propsLabelName="表示順" /></template>
+                  </v-text-field>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -58,11 +62,13 @@
 </template>
 
 <script>
+import RequiredLabel from '~/components/label/RequiredLabel'
 import SingleSubmitButton from '~/components/buttons/SingleSubmitButton'
 import TwoUserSelect from '~/components/TwoUserSelect'
 
 export default {
   components: {
+    RequiredLabel,
     SingleSubmitButton,
     TwoUserSelect
   },

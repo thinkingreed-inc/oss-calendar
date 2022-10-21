@@ -48,6 +48,7 @@
 </template>
 
 <script>
+
 var defaultDepartmentTopValue = '0'
 var defaultDepartmentTopText = '全て'
 export default {

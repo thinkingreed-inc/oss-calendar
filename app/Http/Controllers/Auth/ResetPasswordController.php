@@ -88,14 +88,19 @@ class ResetPasswordController extends Controller
     public function broker()
     {
         $broker = Password::broker();
-        $broker->validator(function(array $credentials) {
-            [$password, $confirm] = [
-                $credentials['password'],
-                $credentials['password_confirmation'],
-            ];
-
-            return $password === $confirm;
-        });
+        /**
+         * 2022.06.21 T.Satou
+         * $broker->validator が廃止されているため、コメント
+         */
+        //$broker->validator(function(array $credentials) {
+        //    [$password, $confirm] = [
+        //        $credentials['password'],
+        //        $credentials['password_confirmation'],
+        //    ];
+        //
+        //
+        //    return $password === $confirm;
+        //});
         return $broker;
     }
 }

@@ -15,7 +15,7 @@ OSS Calendarは企業で使うことを想定したカレンダーアプリで�
 [OSS Calendar](https://oss-calendar.com/)
 
 ## Features
-- Laravel 5.8
+- Laravel 9.*
 - passport
 - Node.js v16.15.1
 - Vue + VueRouter + Vuex 
@@ -69,6 +69,11 @@ docker ps
 docker exec -it [container_id] bash
 # ここからコンテナ内
 cd /var/www/html/
+composer remove fideloper/proxy
+composer require laravel/helpers
+composer require laravel/legacy-factories
+composer require symfony/mailgun-mailer symfony/http-client
+composer require fruitcake/laravel-cors
 composer install
 php artisan key:generate
 php artisan optimize

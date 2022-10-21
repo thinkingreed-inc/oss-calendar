@@ -21,7 +21,9 @@
                     counter="256"
                     type="password"
                     @keyup.enter="save()"
-                  ></v-text-field>
+                  >
+                    <template v-slot:label><required-label propsLabelName="パスワード" /></template>
+                  </v-text-field>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -42,10 +44,12 @@
 </template>
 
 <script>
+import RequiredLabel from '~/components/label/RequiredLabel'
 import SingleSubmitButton from '~/components/buttons/SingleSubmitButton'
 
 export default {
   components: {
+    RequiredLabel,
     SingleSubmitButton
   },
   props: {

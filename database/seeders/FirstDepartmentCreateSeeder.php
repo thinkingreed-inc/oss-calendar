@@ -1,8 +1,10 @@
 <?php
 
+namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Department;
+use DB;
 
 class FirstDepartmentCreateSeeder extends Seeder
 {

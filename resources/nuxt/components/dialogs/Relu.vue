@@ -18,9 +18,7 @@
                     min="1"
                     type="number"
                   >
-                    <template v-slot:prepend>
-                      繰り返す間隔:
-                    </template>
+                    <template v-slot:prepend><required-label propsLabelName="繰り返す間隔:" /></template>
                   </v-text-field>
                 </v-flex>
                 <v-flex class="sm4">
@@ -52,7 +50,9 @@
                         prepend-icon="event"
                         readonly
                         v-on="on"
-                      ></v-text-field>
+                      >
+                        <template v-slot:label><required-label propsLabelName="終了日" /></template>
+                      </v-text-field>
                     </template>
                     <v-date-picker
                       v-model="selected.end_date"
@@ -89,7 +89,12 @@
 </template>
 
 <script>
+import RequiredLabel from '~/components/label/RequiredLabel'
+
 export default {
+  components: {
+    RequiredLabel
+  },
   props: {
     propsReluDialog: {
       type: Boolean,

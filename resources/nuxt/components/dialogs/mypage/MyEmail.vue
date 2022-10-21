@@ -20,7 +20,9 @@
                     :error-messages="errors.collect('email')"
                     counter="256"
                     type="tel"
-                  ></v-text-field>
+                  >
+                    <template v-slot:label><required-label propsLabelName="メールアドレス" /></template>
+                  </v-text-field>
                 </v-flex>
                 <v-flex
                   v-if="confirm_email !== null && confirm_email.length > 0"
@@ -54,10 +56,12 @@
 </template>
 
 <script>
+import RequiredLabel from '~/components/label/RequiredLabel'
 import SingleSubmitButton from '~/components/buttons/SingleSubmitButton'
 
 export default {
   components: {
+    RequiredLabel,
     SingleSubmitButton
   },
   props: {
