@@ -31,7 +31,7 @@
     "sass-loader": "^10.0.0",
     "url": "^0.11.0",
     "vee-validate": "2.2.15",
-    "vuetify": "2.1.1"
+    "vuetify": "2.6.10"
   },
   "devDependencies": {
     "@mdi/font": "^6.7.96",
