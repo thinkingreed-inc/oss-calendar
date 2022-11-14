@@ -48,7 +48,7 @@
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-standard": "^4.1.0",
     "eslint-plugin-vue": "^9.1.1",
-    "node-sass": "^6.0.1",
+    "node-sass": "^7.0.3",
     "prettier": "^2.6.2",
     "stylus": "^0.58.1",
     "stylus-loader": "^4.3.3"
