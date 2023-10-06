@@ -89,6 +89,9 @@ class SendMailReminder extends Command
         $query->where('users.is_enable', '=', 1);
         $query->where('users.deleted_at', '=', null);
 
+        // スケジュールが削除されていない
+        $query->where('schedules.deleted', '=', 0);
+
         // スケジュールの通知時間(スタート時間 - 通知設定(分))が 現在時刻以前のデータを取得
         $nowDatetime = date('Y-m-d H:i:s');
         $query->where(\DB::raw("DATE_SUB(schedules.start_date, INTERVAL reminders_overrides.overrides_minutes MINUTE)"), '<=', $nowDatetime);
