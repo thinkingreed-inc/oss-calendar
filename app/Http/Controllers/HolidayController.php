@@ -30,7 +30,11 @@ class HolidayController extends Controller
 
         $query = Holiday::select('*');
         if( strlen($search) > 0 ) {
-            $query->where(\DB::raw("CONCAT(summary, ',', holiday)"), 'LIKE', "%{$search}%");
+            $searchTerm = "%{$search}%";
+            $query->whereRaw(
+                "CONCAT(summary, ',', holiday) LIKE ?", 
+                [$searchTerm]
+            );
         }
         $holidayYear = $request->get("holiday_year");
         if(!empty($holidayYear)) {

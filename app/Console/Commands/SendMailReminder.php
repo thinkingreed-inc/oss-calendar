@@ -110,18 +110,22 @@ class SendMailReminder extends Command
 
         $notifications = $query->get();
 
-        //繰り返し予定の抽出
-        $recurrings = Recurring::with(['schedule','schedule.attendees'])
-            ->join('schedules', 'recurrings.schedule_id', '=', 'schedules.id')
-            ->where('recurrings.deleted','=',false)
-            ->where('recurrings.start_date', '<=', $nowDatetime)
-            ->where('recurrings.end_date', '>=', \DB::raw("DATE_SUB('".$nowDatetime."', INTERVAL TIMESTAMPDIFF(DAY,schedules.start_date,schedules.end_date) DAY)"))// カレンダーの開始日から予定の期間（日）を引いた日付が終了日以下の場合
-            ->get();
-
         $activeStartFormatted = new DateTime($nowDatetime);
         $activeStartFormatted->format('Y-m-d');
         $activeEndFormatted = new DateTime($nowDatetime);
         $activeEndFormatted->format('Y-m-d');
+
+        //繰り返し予定の抽出
+        $recurrings = Recurring::with(['schedule','schedule.attendees'])
+        ->join('schedules', 'recurrings.schedule_id', '=', 'schedules.id')
+        ->where('recurrings.deleted','=',false)
+        ->where('recurrings.start_date', '<=', $nowDatetime)
+        // カレンダーの開始日から予定の期間（日）を引いた日付が終了日以下の場合
+        ->whereRaw(
+            'recurrings.end_date >= DATE_SUB(?, INTERVAL TIMESTAMPDIFF(DAY, schedules.start_date, schedules.end_date) DAY)', 
+            [$activeStartFormatted]
+        )
+        ->get();
 
         $transformer = new \Recurr\Transformer\ArrayTransformer();
         $transformerConfig = new \Recurr\Transformer\ArrayTransformerConfig();

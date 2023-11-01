@@ -119,18 +119,22 @@ class ScheduleController extends Controller
 
         $event_arrays= [];
 
+        $activeStartFormatted = new DateTime($activeStart);
+        $activeStartFormatted->format('Y-m-d');
+        $activeEndFormatted = new DateTime($activeEnd);
+        $activeEndFormatted->format('Y-m-d');
+
         //繰り返し予定の抽出
         $recurrings = Recurring::with(['schedule','schedule.attendees'])
             ->join('schedules', 'recurrings.schedule_id', '=', 'schedules.id')
             ->where('recurrings.deleted','=',false)
             ->where('recurrings.start_date', '<=', $activeEnd)
-            ->where('recurrings.end_date', '>=', \DB::raw("DATE_SUB('".$activeStart."', INTERVAL TIMESTAMPDIFF(DAY,schedules.start_date,schedules.end_date) DAY)"))// カレンダーの開始日から予定の期間（日）を引いた日付が終了日以下の場合
+            // カレンダーの開始日から予定の期間（日）を引いた日付が終了日以下の場合
+            ->whereRaw(
+                'recurrings.end_date >= DATE_SUB(?, INTERVAL TIMESTAMPDIFF(DAY, schedules.start_date, schedules.end_date) DAY)', 
+                [$activeStartFormatted]
+            )
             ->get();
-
-        $activeStartFormatted = new DateTime($activeStart);
-        $activeStartFormatted->format('Y-m-d');
-        $activeEndFormatted = new DateTime($activeEnd);
-        $activeEndFormatted->format('Y-m-d');
 
         //繰り返し予定をRRuleに従い展開
         //parent_idとparent_uidを割り振り3次元配列に格納
