@@ -85,6 +85,7 @@
                     prepend-icon="access_time"
                     label="開始時刻"
                     type="tel"
+                    @keyup="updateStartTime"
                   ></v-combobox>
                 </v-flex>
                 <v-flex sm3 xs6>
@@ -133,6 +134,7 @@
                     prepend-icon="access_time"
                     label="終了時刻"
                     type="tel"
+                    @keyup="updateEndTime"
                   ></v-combobox>
                 </v-flex>
                 <v-flex sm2 xs4>
@@ -736,6 +738,12 @@ export default {
         }
       }
       return times
+    },
+    updateStartTime(e) {
+      this.selected.start_date_time = e.target.value
+    },
+    updateEndTime(e) {
+      this.selected.end_date_time = e.target.value
     },
     async setTypes() {
       var types = []
